@@ -9,4 +9,9 @@ class Produto extends Model
     protected $fillable=[
         'descricao','preco','cor','peso'
     ];
+
+    public function categorias()
+    {
+        return $this->belongsTo('App\Categoria');
+    }
 }
