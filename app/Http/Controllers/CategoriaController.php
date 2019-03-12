@@ -36,11 +36,14 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->only(['descricao']);
+        $produtos = $request['produtos'];
+
         $categoria = Categoria::create($data);
 
         if($categoria)
         {
+            $categoria->produtos()->createMany($produtos);
             return response()->json(['data'=>$categoria,'status'=>true]);
         }else{
             return response()->json(['data'=>'Erro ao criar categoria','status'=>false]);
